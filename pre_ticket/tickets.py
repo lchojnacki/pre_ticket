@@ -18,15 +18,16 @@ def retrieve_ticket(branch, regex):
 
 
 def is_ticket_in_message(contents, ticket):
-    for line in contents.splitlines():
+    for i, line in enumerate(contents.splitlines()):
         stripped = line.strip().lower()
 
-        if stripped == "" or stripped.startswith("#"):
+        if stripped == "" or (stripped.startswith("#") and i != 0):
             continue
 
         if ticket.lower() in stripped:
             return True
 
+    return False
 
 def add_ticket_number(filename, regex, format_template):
     branch = get_current_branch()

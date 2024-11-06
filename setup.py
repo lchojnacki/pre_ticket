@@ -17,6 +17,7 @@ setup(
     ],
     description="pre-commit hook for adding issue ticket number to your git commit messages",
     install_requires=requirements,
+    tests_require=["pytest"],
     name="pre_ticket",
     version="1.0.0",
     license="MIT license",
