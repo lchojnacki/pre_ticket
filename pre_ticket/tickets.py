@@ -18,6 +18,26 @@ def retrieve_ticket(branch, regex):
 
 
 def is_ticket_in_message(contents, ticket):
+    """
+    Checks if a specified ticket is present in the given message contents.
+
+    This function scans through each line of the provided message contents,
+    ignoring empty lines and comments (except for the first line), to determine
+    if the specified ticket is mentioned. It performs a case-insensitive search
+    for the ticket within the non-empty, non-comment lines.
+
+    The first line is an exception because some conventions assume that the task
+    number preceded by a hashtag will appear at the beginning of the commit
+    message: "#123 Commit Message".
+
+    Examples:
+    >>> is_ticket_in_message("This is a message with ticket #123", "#123")
+    True
+    >>> is_ticket_in_message("This is a message without a ticket", "#123")
+    False
+    >>> is_ticket_in_message("#123 This is a message with a ticket", "#123")
+    True
+    """
     for i, line in enumerate(contents.splitlines()):
         stripped = line.strip().lower()
 
